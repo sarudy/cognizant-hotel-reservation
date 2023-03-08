@@ -73,24 +73,24 @@ public class Tester {
                 LocalDate.of(2023, 04, 12));
 //        System.out.println(ReservationService.findRooms(LocalDate.of(2023, 10, 9),
 //                LocalDate.of(2023, 10, 12)));
-        System.out.println(ReservationService.getCustomersReservation(goodCustomer));
-        ReservationService.printAllReservation();
+//        System.out.println(ReservationService.getCustomersReservation(goodCustomer));
+//        ReservationService.printAllReservation();
         api.HotelResource.createACustomer(cleverCustomer.getFirstName(), cleverCustomer.getLastName(), cleverCustomer.getEmail());
         api.HotelResource.createACustomer(goodCustomer.getFirstName(), goodCustomer.getLastName(), goodCustomer.getEmail());
-        System.out.println(HotelResource.getCustomer("irene@bohemia.com"));
+//        System.out.println(HotelResource.getCustomer("irene@bohemia.com"));
         ReservationService.addRoom(newRoom);
-        System.out.println(HotelResource.getRoom("202"));
-        System.out.println(HotelResource.bookARoom("irene@bohemia.com", newRoom4, LocalDate.of(2024, 03, 04),
-                LocalDate.of(2024, 03, 05)));
-        System.out.println("-----");
-        System.out.println((HotelResource.getCustomerReservations("irene@bohemia.com")));
-        System.out.println(HotelResource.findARoom(LocalDate.of(2023, 04, 03), LocalDate.of(2023, 04, 06)));
-        System.out.println("-----");
-        System.out.println(HotelResource.getCustomer("drjekyll@valid.com"));
-        System.out.println("~~~~~");
-        System.out.println(AdminResource.getAllRooms());
-        System.out.println(AdminResource.getAllCustomers());
-        AdminResource.displayAllReservations();
+//        System.out.println(HotelResource.getRoom("202"));
+//        System.out.println(HotelResource.bookARoom("irene@bohemia.com", newRoom4, LocalDate.of(2024, 03, 04),
+//                LocalDate.of(2024, 03, 05)));
+//        System.out.println("-----");
+//        System.out.println((HotelResource.getCustomerReservations("irene@bohemia.com")));
+//        System.out.println(HotelResource.findARoom(LocalDate.of(2023, 04, 03), LocalDate.of(2023, 04, 06)));
+//        System.out.println("-----");
+//        System.out.println(HotelResource.getCustomer("drjekyll@valid.com"));
+//        System.out.println("~~~~~");
+//        System.out.println(AdminResource.getAllRooms());
+//        System.out.println(AdminResource.getAllCustomers());
+//        AdminResource.displayAllReservations();
         MainMenu.startMainMenu();
     }
 

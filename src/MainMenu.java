@@ -1,6 +1,8 @@
 import model.Customer;
 import service.CustomerService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -55,17 +57,32 @@ public class MainMenu {
         }
     }
 
+    public static LocalDate valiDate(String date) {
+        return null;
+    }
     private static void findAndReserveARoom() {
-        final Scanner scanner = new Scanner(System.in);
-
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ID (i.e. email) for the customer making a reservation:");
-        String customerEmail = "";
-        customerEmail = new Scanner(System.in);
+        String customerEmail = scanner.nextLine();
+        if (Customer.isValidEmail(customerEmail)) {
+
+        } else {
+            throw new IllegalArgumentException();
+        }
         Customer customer = CustomerService.getCustomer(customerEmail);
 
         if (customer != null) {
             System.out.println("What date would " + customer.getFirstName() + " like to check in?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
+            // I'd like to say I am using yyy-mm-dd here because it reduces the chance of an error
+            // via the difference in USA vs EU date formats, but it's really because LocalDate parses
+            // it without me having to do extra messing around1
+            try {
+                LocalDate CheckIn = LocalDate.parse(scanner.nextLine());
+                System.out.println(CheckIn);
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter a valid date in the format yyyy-mm-dd");
+            }
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
