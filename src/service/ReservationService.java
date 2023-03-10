@@ -45,9 +45,6 @@ public class ReservationService {
     }
 
     public static Collection<IRoom> findRooms(LocalDate checkInDate, LocalDate checkOutDate) {
-        // This will need a try catch to be sure the dates are valid,
-        // in the future and checkout is at least one day after checkin
-        // saving this for when the scanner input part is ready
         Collection<IRoom> booked = new ArrayList<>();
         Collection<IRoom> open = new ArrayList<>();
         for (Reservation reservation : reservations) {
@@ -59,6 +56,10 @@ public class ReservationService {
             }
         }
         return open;
+    }
+
+    public static void prettyPrintRoomsList() {
+        System.out.println();
     }
 
     public static Collection<Reservation> getCustomersReservation(Customer customer) {

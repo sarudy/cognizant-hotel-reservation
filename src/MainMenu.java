@@ -78,7 +78,7 @@ public class MainMenu {
             System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
             LocalDate checkOut = ReservationService.linearTimePlease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
-// add logic to test for valid reservation
+            System.out.println(ReservationService.findRooms(checkIn,checkOut));
 
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
