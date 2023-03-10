@@ -60,16 +60,13 @@ public class MainMenu {
     public static LocalDate valiDate(String date) {
         return null;
     }
+
     private static void findAndReserveARoom() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ID (i.e. email) for the customer making a reservation:");
-        String customerEmail = scanner.nextLine();
-        if (Customer.isValidEmail(customerEmail)) {
-
-        } else {
-            throw new IllegalArgumentException();
-        }
+        String customerEmail = CustomerService.getValidEmail(scanner.nextLine());
         Customer customer = CustomerService.getCustomer(customerEmail);
+
 
         if (customer != null) {
             System.out.println("What date would " + customer.getFirstName() + " like to check in?" + "\n" +
