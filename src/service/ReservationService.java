@@ -107,6 +107,7 @@ public class ReservationService {
     public static LocalDate getValiDate(String date) {
         {
             if (isADate(date)) {
+            } else {
                 boolean realDate = false;
                 while (!realDate) {
                     Scanner scanner = new Scanner(System.in);
@@ -119,9 +120,10 @@ public class ReservationService {
                     }
                 }
             }
-            return LocalDate.parse(date);
         }
+        return LocalDate.parse(date);
     }
+
 
     public static LocalDate noYesterdays(LocalDate CheckIn) {
         if (!CheckIn.isBefore(LocalDate.now())) ;
@@ -129,10 +131,10 @@ public class ReservationService {
             while (CheckIn.isBefore(LocalDate.now())) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("We cannot backdate reservations." + "\n" +
-                        "Please provide a check in date today, " +
-                        LocalDate.now() + ", or later: ");
+                        "Please provide a check in date today (" +
+                        LocalDate.now() + ") or later: ");
                 LocalDate tryAgain = getValiDate(scanner.nextLine());
-                if (!CheckIn.isBefore(LocalDate.now())) {
+                if (!CheckIn.isAfter(LocalDate.now())) {
                     scanner.close();
                     return tryAgain;
                 }
@@ -141,7 +143,7 @@ public class ReservationService {
         }
     }
 
-    public static LocalDate linearTimePLease(LocalDate CheckIn, LocalDate CheckOut) {
+    public static LocalDate linearTimePlease(LocalDate CheckIn, LocalDate CheckOut) {
         if (CheckOut.isAfter(CheckIn)) ;
         {
             while (CheckOut.isBefore(CheckIn)) {

@@ -75,10 +75,10 @@ public class MainMenu {
             // via the difference in USA vs EU date formats, but it's really because LocalDate parses
             // it without me having to do extra messing around
             LocalDate checkIn = ReservationService.noYesterdays(ReservationService.getValiDate(scanner.nextLine()));
-//            LocalDate checkIn = ReservationService.noYesterdays(ReservationService.getValiDate(scanner.nextLine()));
-//            System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
-//                    "Enter date in yyyy-mm-dd format:");
-//            LocalDate checkOut = ReservationService.linearTimePLease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
+            System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
+                    "Enter date in yyyy-mm-dd format:");
+            LocalDate checkOut = ReservationService.linearTimePlease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
+// add logic to test for valid reservation
 
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
