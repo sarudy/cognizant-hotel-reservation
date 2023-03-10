@@ -1,9 +1,11 @@
 import model.Customer;
 import service.CustomerService;
+import service.ReservationService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
 
 public class MainMenu {
     public static void printMainMenu() {
@@ -57,9 +59,7 @@ public class MainMenu {
         }
     }
 
-    public static LocalDate valiDate(String date) {
-        return null;
-    }
+
 
     private static void findAndReserveARoom() {
         Scanner scanner = new Scanner(System.in);
@@ -73,13 +73,13 @@ public class MainMenu {
                     "Enter date in yyyy-mm-dd format:");
             // I'd like to say I am using yyy-mm-dd here because it reduces the chance of an error
             // via the difference in USA vs EU date formats, but it's really because LocalDate parses
-            // it without me having to do extra messing around1
-            try {
-                LocalDate CheckIn = LocalDate.parse(scanner.nextLine());
-                System.out.println(CheckIn);
-            } catch (DateTimeParseException e) {
-                System.out.println("Please enter a valid date in the format yyyy-mm-dd");
-            }
+            // it without me having to do extra messing around
+            LocalDate checkIn = ReservationService.noYesterdays(ReservationService.getValiDate(scanner.nextLine()));
+//            LocalDate checkIn = ReservationService.noYesterdays(ReservationService.getValiDate(scanner.nextLine()));
+//            System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
+//                    "Enter date in yyyy-mm-dd format:");
+//            LocalDate checkOut = ReservationService.linearTimePLease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
+
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +

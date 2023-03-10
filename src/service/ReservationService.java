@@ -7,6 +7,7 @@ import model.Reservation;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -93,6 +94,72 @@ public class ReservationService {
             }
         }
     }
+
+    public static boolean isADate(String date) {
+        try {
+            LocalDate test = LocalDate.parse(date);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    public static LocalDate getValiDate(String date) {
+        {
+            if (isADate(date)) {
+                boolean realDate = false;
+                while (!realDate) {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Please enter a valid date in the format yyyy-mm-dd");
+                    String tryAgain = scanner.nextLine();
+                    realDate = isADate(tryAgain);
+                    if (isADate(tryAgain)) {
+                        scanner.close();
+                        return LocalDate.parse(tryAgain);
+                    }
+                }
+            }
+            return LocalDate.parse(date);
+        }
+    }
+
+    public static LocalDate noYesterdays(LocalDate CheckIn) {
+        if (!CheckIn.isBefore(LocalDate.now())) ;
+        {
+            while (CheckIn.isBefore(LocalDate.now())) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("We cannot backdate reservations." + "\n" +
+                        "Please provide a check in date today, " +
+                        LocalDate.now() + ", or later: ");
+                LocalDate tryAgain = getValiDate(scanner.nextLine());
+                if (!CheckIn.isBefore(LocalDate.now())) {
+                    scanner.close();
+                    return tryAgain;
+                }
+            }
+            return CheckIn;
+        }
+    }
+
+    public static LocalDate linearTimePLease(LocalDate CheckIn, LocalDate CheckOut) {
+        if (CheckOut.isAfter(CheckIn)) ;
+        {
+            while (CheckOut.isBefore(CheckIn)) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Visits must be at least one night long." + "\n" +
+                        "Please provide a check out date at least one day after check in: ");
+                LocalDate tryAgain = getValiDate(scanner.nextLine());
+                if (CheckOut.isAfter(CheckIn)) {
+                    scanner.close();
+                    return tryAgain;
+                }
+
+            }
+            return CheckOut;
+        }
+    }
+
+
 }
 
 
