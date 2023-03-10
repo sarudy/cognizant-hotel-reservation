@@ -58,8 +58,14 @@ public class ReservationService {
         return open;
     }
 
-    public static void prettyPrintRoomsList() {
-        System.out.println();
+        public static void prettyPrintRooms(Collection<IRoom> rooms) {
+        if (rooms.isEmpty()) {
+            System.out.println("No rooms found for the date range specicfied.");
+        } else {
+            for (IRoom room : rooms) {
+                System.out.println(room);
+            }
+        }
     }
 
     public static Collection<Reservation> getCustomersReservation(Customer customer) {
