@@ -60,7 +60,7 @@ public class ReservationService {
 
         public static void prettyPrintRooms(Collection<IRoom> rooms) {
         if (rooms.isEmpty()) {
-            System.out.println("No rooms found for the date range specicfied.");
+            System.out.println("No rooms found");
         } else {
             for (IRoom room : rooms) {
                 System.out.println(room);

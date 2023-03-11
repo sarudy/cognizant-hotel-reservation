@@ -1,8 +1,10 @@
+import api.AdminResource;
 import model.Customer;
 import service.CustomerService;
 import service.ReservationService;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -71,14 +73,20 @@ public class MainMenu {
         if (customer != null) {
             System.out.println("What date would " + customer.getFirstName() + " like to check in?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
-            // I'd like to say I am using yyy-mm-dd here because it reduces the chance of an error
-            // via the difference in USA vs EU date formats, but it's really because LocalDate parses
-            // it without me having to do extra messing around
+            // I'd like to say I am using yyyy-mm-dd here because it reduces the chance of an error
+            // via the dd/mm/yyyy and mm/dd/yyyy date formats, but it's really because it parses
+            // without needing much extra messing around
             LocalDate checkIn = ReservationService.noYesterdays(ReservationService.getValiDate(scanner.nextLine()));
             System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
             LocalDate checkOut = ReservationService.linearTimePlease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
+            DateTimeFormatter dmy = DateTimeFormatter.ofPattern("d MMM YYYY");
+            System.out.println("These rooms are available for a stay from " + dmy.format(checkIn) + " to " + dmy.format(checkOut) );
             ReservationService.prettyPrintRooms(ReservationService.findRooms(checkIn,checkOut));
+
+            System.out.println("🧡🧡🧡🧡🧡🧡");
+            System.out.println("find rooms works, now test if it's catching availability");
+//            AdminResource.displayAllReservations(); // for the purpose of knowing unavailable dates to pick
 
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
