@@ -80,6 +80,7 @@ public class Tester {
 //        ReservationService.printAllReservation();
         api.HotelResource.createACustomer(cleverCustomer.getFirstName(), cleverCustomer.getLastName(), cleverCustomer.getEmail());
         api.HotelResource.createACustomer(goodCustomer.getFirstName(), goodCustomer.getLastName(), goodCustomer.getEmail());
+        api.HotelResource.createACustomer(pilotCustomer.getFirstName(), pilotCustomer.getLastName(), pilotCustomer.getEmail());
 //        System.out.println(HotelResource.getCustomer("irene@bohemia.com"));
         ReservationService.addRoom(newRoom1);
 //        System.out.println(HotelResource.getRoom("202"));
