@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import static service.CustomerService.addCustomer;
+import static service.ReservationService.findRooms;
 
 public class Tester {
     public static void main(String[] args) {
@@ -48,18 +49,18 @@ public class Tester {
 //        System.out.println(CustomerService.getCustomer("kris@hall.com"));
 //        System.out.println(CustomerService.getCustomer("bill@frye.com"));
 
-        IRoom newRoom1 = new Room("202", RoomType.SINGLE, 200.00);
-        IRoom newRoom2 = new Room("202a", RoomType.SINGLE, 250.00);
-        IRoom newRoom3 = new Room("202b", RoomType.DOUBLE, 200.00);
-        IRoom newRoom4 = new Room("202c", RoomType.DOUBLE, 300.00);
-        IRoom newRoom5 = new Room("202d", RoomType.SINGLE, 1000.00);
+        IRoom newRoom1 = new Room("100", RoomType.SINGLE, 200.00);
+        IRoom newRoom2 = new Room("110", RoomType.SINGLE, 250.00);
+        IRoom newRoom3 = new Room("200", RoomType.DOUBLE, 200.00);
+        IRoom newRoom4 = new Room("205", RoomType.DOUBLE, 300.00);
+        IRoom newRoom5 = new Room("208", RoomType.SINGLE, 1000.00);
         ReservationService.addRoom(newRoom1);
         ReservationService.addRoom(newRoom2);
         ReservationService.addRoom(newRoom3);
         ReservationService.addRoom(newRoom4);
-        ReservationService.addRoom(newRoom5); /*
-        System.out.println(newRoom);
-        System.out.println(ReservationService.rooms); */
+        ReservationService.addRoom(newRoom5);
+//        System.out.println(newRoom);
+//        System.out.println(ReservationService.rooms);
 // test make a reservation
         Customer pilotCustomer = new Customer("Amelia", "Earhart", "earhart@lostatsea.net");
         Customer cleverCustomer = new Customer("Irene", "Adler", "irene@bohemia.com");
@@ -94,8 +95,8 @@ public class Tester {
 //        System.out.println("~~~~~");
 //        System.out.println(AdminResource.getAllRooms());
 //        System.out.println(AdminResource.getAllCustomers());
-//        AdminResource.displayAllReservations();
-          MainMenu.startMainMenu();
+//          AdminResource.displayAllReservations();
+        MainMenu.startMainMenu();
     }
 
 }

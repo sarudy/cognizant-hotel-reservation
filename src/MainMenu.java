@@ -82,10 +82,10 @@ public class MainMenu {
             LocalDate checkOut = ReservationService.linearTimePlease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
             DateTimeFormatter dmy = DateTimeFormatter.ofPattern("d MMM YYYY");
             System.out.println("These rooms are available for a stay from " + dmy.format(checkIn) + " to " + dmy.format(checkOut) );
-            ReservationService.prettyPrintRooms(ReservationService.findRooms(checkIn,checkOut));
+//            ReservationService.prettyPrintRooms(ReservationService.findRooms(checkIn,checkOut));
 
-            System.out.println("🧡🧡🧡🧡🧡🧡");
-            System.out.println("find rooms works, now test if it's catching availability");
+            System.out.println("💜💙💚💛🧡");
+            System.out.println("find rooms works, now I need to finish pretty print");
 //            AdminResource.displayAllReservations(); // for the purpose of knowing unavailable dates to pick
 
         } else {

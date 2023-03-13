@@ -9,6 +9,7 @@ import service.ReservationService;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Map;
 
 import static service.CustomerService.customers;
 import static service.ReservationService.rooms;
@@ -46,7 +47,7 @@ public class HotelResource {
         return ReservationService.getCustomersReservation(customers.get(customerEmail));
     }
 
-    public static Collection<IRoom> findARoom(LocalDate checkIn, LocalDate checkOut) {
+    public static Map<String, IRoom> findARoom(LocalDate checkIn, LocalDate checkOut) {
         return ReservationService.findRooms(checkIn, checkOut);
     }
 }

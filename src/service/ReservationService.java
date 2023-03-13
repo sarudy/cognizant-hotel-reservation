@@ -38,27 +38,33 @@ public class ReservationService {
         return reservation;
     }
 
-    private static boolean isBooked(final Reservation reservation,
-                                    final LocalDate checkInDate, final LocalDate checkOutDate) {
-        return checkOutDate.isBefore(reservation.getCheckOutDate()) &&
-                checkOutDate.isAfter(reservation.getCheckInDate());
+    private static boolean isBooked(final String roomNumber, final LocalDate checkInDate, final LocalDate checkOutDate) {
+        for (Reservation reservation : reservations) {
+            if (roomNumber == reservation.getRoom().getRoomNumber() &&
+                    checkInDate.isBefore(reservation.getCheckOutDate()) &&
+                    checkOutDate.isAfter(reservation.getCheckInDate())) {
+                return true;
+            }
+        } return false;
     }
 
-    public static Collection<IRoom> findRooms(LocalDate checkInDate, LocalDate checkOutDate) {
-        Collection<IRoom> booked = new ArrayList<>();
-        Collection<IRoom> open = new ArrayList<>();
-        for (Reservation reservation : reservations) {
-            if (isBooked(reservation, checkInDate, checkOutDate)) {
-                booked.add(reservation.getRoom());
-            }
-            if (!isBooked(reservation, checkInDate, checkOutDate)) {
-                open.add(reservation.getRoom());
+
+    public static Map<String, IRoom> findRooms(LocalDate checkInDate, LocalDate checkOutDate) {
+        Map<String, IRoom> booked = new HashMap<>();
+        Map<String, IRoom> open = new HashMap<>();
+        System.out.println("in " + checkInDate + ", out " + checkOutDate);
+        for (Map.Entry<String, IRoom> room : rooms.entrySet()) {
+            if (isBooked(room.getKey(), checkInDate, checkOutDate)) {
+                System.out.println(room.getKey() + " is booked");
+            } else {
+                System.out.println(room.getKey() + " is available");
             }
         }
         return open;
     }
 
-        public static void prettyPrintRooms(Collection<IRoom> rooms) {
+
+    public static void prettyPrintRooms(Collection<IRoom> rooms) {
         if (rooms.isEmpty()) {
             System.out.println("No rooms found");
         } else {
