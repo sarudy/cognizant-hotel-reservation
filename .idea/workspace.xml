@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdb109c9-ff9b-4875-a0b5-028a47124c50" name="Changes" comment="why do you not exclude duplicates for me.  whyyyyy?">
+    <list default="true" id="fdb109c9-ff9b-4875-a0b5-028a47124c50" name="Changes" comment="why did I use Maps?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/HotelResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678559517168</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="why did I use Maps?">
+      <created>1678682734147</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1678682734147</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,7 +182,8 @@
     <MESSAGE value="Progress.  Some progress." />
     <MESSAGE value="must resist temptation to get bogged down in formatting" />
     <MESSAGE value="why do you not exclude duplicates for me.  whyyyyy?" />
-    <option name="LAST_COMMIT_MESSAGE" value="why do you not exclude duplicates for me.  whyyyyy?" />
+    <MESSAGE value="why did I use Maps?" />
+    <option name="LAST_COMMIT_MESSAGE" value="why did I use Maps?" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HotelRegistration$Tester.ic" NAME="Tester Coverage Results" MODIFIED="1678408832734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

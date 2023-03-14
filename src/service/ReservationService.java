@@ -45,33 +45,41 @@ public class ReservationService {
                     checkOutDate.isAfter(reservation.getCheckInDate())) {
                 return true;
             }
-        } return false;
+        }
+        return false;
     }
 
 
     public static Map<String, IRoom> findRooms(LocalDate checkInDate, LocalDate checkOutDate) {
         Map<String, IRoom> booked = new HashMap<>();
         Map<String, IRoom> open = new HashMap<>();
-        System.out.println("in " + checkInDate + ", out " + checkOutDate);
+//        System.out.println("in " + checkInDate + ", out " + checkOutDate);
         for (Map.Entry<String, IRoom> room : rooms.entrySet()) {
             if (isBooked(room.getKey(), checkInDate, checkOutDate)) {
-                System.out.println(room.getKey() + " is booked");
+                booked.put(room.getKey(), room.getValue());
+//                System.out.println(room.getKey() + " is booked");
             } else {
-                System.out.println(room.getKey() + " is available");
+//               System.out.println(room.getValue());
+                open.put(room.getKey(), room.getValue());
+//                System.out.println(room.getKey() + " is available");
             }
         }
         return open;
+
     }
 
-
-    public static void prettyPrintRooms(Collection<IRoom> rooms) {
-        if (rooms.isEmpty()) {
-            System.out.println("No rooms found");
-        } else {
-            for (IRoom room : rooms) {
-                System.out.println(room);
-            }
+    public static void printRooms(Map<String, IRoom> theseRooms) {
+        Map<String, IRoom> sortedRooms = new TreeMap<>(theseRooms);
+//      I realize how silly it is to throw a TreeMap in here, a thing I only just learned existed because Maps
+//      don't really sort and it offended my aesthetic sense to have rooms listed all higglty pigglety in any order
+//      and this does get the job done.  I have a suspicion I could go back and make rooms into a TreeMap from the
+//      get go but I am already on thin ice for using LocalDate.  I am also not 100 percent on what TreeMaps are
+//      about in a more global sense and I don't think I need to go off on another tangent right this moment.
+        for (Map.Entry<String, IRoom> thisRoom : sortedRooms.entrySet()) {
+            System.out.println(thisRoom.getValue().getRoomType() + " ROOM: " + thisRoom.getValue().getRoomNumber() +
+                    "\t" + "PRICE: " + formatter.format(thisRoom.getValue().getRoomPrice()) + " per night");
         }
+
     }
 
     public static Collection<Reservation> getCustomersReservation(Customer customer) {

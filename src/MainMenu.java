@@ -5,7 +5,6 @@ import service.ReservationService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 
@@ -80,14 +79,29 @@ public class MainMenu {
             System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
             LocalDate checkOut = ReservationService.linearTimePlease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
+            // using a more customer friendly date format as this is the part that might be exposed to the guest
             DateTimeFormatter dmy = DateTimeFormatter.ofPattern("d MMM YYYY");
-            System.out.println("These rooms are available for a stay from " + dmy.format(checkIn) + " to " + dmy.format(checkOut) );
-//            ReservationService.prettyPrintRooms(ReservationService.findRooms(checkIn,checkOut));
+            if (ReservationService.findRooms(checkIn,checkOut) != null) {
+                System.out.println("These rooms are available for a stay from " +
+                        dmy.format(checkIn) + " to " + dmy.format(checkOut) );
+                ReservationService.printRooms(ReservationService.findRooms(checkIn, checkOut));
+            } else {
+                System.out.println("We have checked availability from " +
+                        dmy.format(checkIn) + " to " + dmy.format(checkOut) +
+                        "and could not find any rooms");
+                if (ReservationService.findRooms(checkIn,checkOut) != null) {
+                System.out.println("Checking ahead we have the following availability from " +
+                        dmy.format(checkIn.plusWeeks(1)) + " to " + dmy.format(checkOut.plusWeeks(1)));
+                    ReservationService.printRooms(ReservationService.findRooms(checkIn.plusWeeks(1), checkOut.plusWeeks(1)));
+                } else {
+                    System.out.println("We checked the next seven day range and were unfortunately unable to find any rooms.");
+                }
+            }
+
+
+
 
             System.out.println("💜💙💚💛🧡");
-            System.out.println("find rooms works, now I need to finish pretty print");
-//            AdminResource.displayAllReservations(); // for the purpose of knowing unavailable dates to pick
-
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
