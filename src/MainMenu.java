@@ -1,14 +1,18 @@
-import api.AdminResource;
 import model.Customer;
+import model.IRoom;
 import service.CustomerService;
-import service.ReservationService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.Scanner;
+
+import static service.ReservationService.*;
 
 
 public class MainMenu {
+    // allowing a more customer friendly date format for output that might be exposed to the guest
+    static DateTimeFormatter dmy = DateTimeFormatter.ofPattern("EEE d MMM YYYY");
     public static void printMainMenu() {
         System.out.println("" +
                 "  CUSTOMER RESERVATION MENU  " + "\n" +
@@ -61,7 +65,6 @@ public class MainMenu {
     }
 
 
-
     private static void findAndReserveARoom() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ID (i.e. email) for the customer making a reservation:");
@@ -70,36 +73,36 @@ public class MainMenu {
 
 
         if (customer != null) {
+
             System.out.println("What date would " + customer.getFirstName() + " like to check in?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
             // I'd like to say I am using yyyy-mm-dd here because it reduces the chance of an error
             // via the dd/mm/yyyy and mm/dd/yyyy date formats, but it's really because it parses
             // without needing much extra messing around
-            LocalDate checkIn = ReservationService.noYesterdays(ReservationService.getValiDate(scanner.nextLine()));
+            LocalDate checkIn = noYesterdays(getValiDate(scanner.nextLine()));
             System.out.println("What date would " + customer.getFirstName() + " like to check out?" + "\n" +
                     "Enter date in yyyy-mm-dd format:");
-            LocalDate checkOut = ReservationService.linearTimePlease(checkIn, ReservationService.getValiDate(scanner.nextLine()));
-            // using a more customer friendly date format as this is the part that might be exposed to the guest
-            DateTimeFormatter dmy = DateTimeFormatter.ofPattern("d MMM YYYY");
-            if (ReservationService.findRooms(checkIn,checkOut) != null) {
+            LocalDate checkOut = linearTimePlease(checkIn, getValiDate(scanner.nextLine()));
+
+
+            Map<String, IRoom> availableRooms = findRooms(checkIn, checkOut);
+            if (!availableRooms.isEmpty()) {
                 System.out.println("These rooms are available for a stay from " +
-                        dmy.format(checkIn) + " to " + dmy.format(checkOut) );
-                ReservationService.printRooms(ReservationService.findRooms(checkIn, checkOut));
+                        dmy.format(checkIn) + " to " + dmy.format(checkOut));
+                printRooms(availableRooms);
             } else {
-                System.out.println("We have checked availability from " +
-                        dmy.format(checkIn) + " to " + dmy.format(checkOut) +
-                        "and could not find any rooms");
-                if (ReservationService.findRooms(checkIn,checkOut) != null) {
-                System.out.println("Checking ahead we have the following availability from " +
-                        dmy.format(checkIn.plusWeeks(1)) + " to " + dmy.format(checkOut.plusWeeks(1)));
-                    ReservationService.printRooms(ReservationService.findRooms(checkIn.plusWeeks(1), checkOut.plusWeeks(1)));
+                System.out.println("We are sorry.  There are no available rooms for a stay from " +
+                        dmy.format(checkIn) + " to " + dmy.format(checkOut));
+                System.out.println("\nWe'll check the following week for alternatives.");
+                Map<String, IRoom> altRooms = findRooms(checkIn.plusWeeks(1), checkOut.plusWeeks(1));
+                if (!altRooms.isEmpty()) {
+                    System.out.println("\nThese rooms are available for a stay from " +
+                            dmy.format(checkIn.plusWeeks(1)) + " to " + dmy.format(checkOut.plusWeeks(1)));
+                    printRooms(altRooms);
                 } else {
-                    System.out.println("We checked the next seven day range and were unfortunately unable to find any rooms.");
+                    System.out.println("no room a the inn");
                 }
             }
-
-
-
 
             System.out.println("💜💙💚💛🧡");
         } else {

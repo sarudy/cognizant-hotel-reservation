@@ -55,7 +55,7 @@ public class Tester {
         IRoom newRoom3 = new Room("200", RoomType.DOUBLE, 200.00);
         IRoom newRoom4 = new Room("300", RoomType.DOUBLE, 300.00);
         IRoom newRoom5 = new Room("208", RoomType.SINGLE, 500.00);
-        IRoom newRoom6 = new Room("bridal suite", RoomType.SINGLE, 1000.00);
+        IRoom newRoom6 = new Room("Loft", RoomType.DOUBLE, 1000.00);
         ReservationService.addRoom(newRoom1);
         ReservationService.addRoom(newRoom1);
         ReservationService.addRoom(newRoom2);
@@ -100,12 +100,12 @@ public class Tester {
 //        System.out.println(AdminResource.getAllRooms());
 //        System.out.println(AdminResource.getAllCustomers());
 //          AdminResource.displayAllReservations();
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom1, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 30));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom2, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 30));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom3, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 30));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom4, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 30));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom5, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 30));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom6, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 15));
+        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom1, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 02));
+        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom2, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 03));
+        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom3, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 04));
+        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom4, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 05));
+        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom5, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 06));
+        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom6, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 10));
         MainMenu.startMainMenu();
     }
 
