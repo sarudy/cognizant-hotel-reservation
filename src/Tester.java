@@ -44,6 +44,7 @@ public class Tester {
         addCustomer("Kris", "Hall", "kris@hall.com");
         addCustomer("Mary", "Diaz", "mary@diaz.com");
         addCustomer("Beth", "Cruz", "beth@cruz.com");
+        addCustomer("Irene", "Adler", "irene@bohemia.com");
 //        System.out.println(CustomerService.getAllCustomers());
 //        System.out.println(CustomerService.getCustomer("kris@hall.com"));
 //        System.out.println(CustomerService.getCustomer("bill@frye.com"));
@@ -78,8 +79,6 @@ public class Tester {
         reserveARoom(goodCustomer, newRoom2, in, out);
         reserveARoom(goodCustomer, newRoom3, in2, out2);
 //        System.out.println(ReservationService.reservations);
-        reserveARoom(cleverCustomer, newRoom4, LocalDate.of(2023, 04, 2),
-                LocalDate.of(2023, 04, 12));
 //        System.out.println(ReservationService.findRooms(LocalDate.of(2023, 10, 9),
 //                LocalDate.of(2023, 10, 12)));
 //        System.out.println(ReservationService.getCustomersReservation(goodCustomer));
@@ -107,14 +106,12 @@ public class Tester {
         reserveARoom(customers.get("levi@king.com"), newRoom4, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 05));
         reserveARoom(customers.get("levi@king.com"), newRoom5, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 06));
         reserveARoom(customers.get("levi@king.com"), newRoom6, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 10));
-//        MainMenu.startMainMenu();
+        reserveARoom(customers.get("irene@bohemia.com"), newRoom4, LocalDate.of(2023, 04, 2),
+                LocalDate.of(2023, 04, 12));
+        reserveARoom(customers.get("drjekyll@valid.com"), newRoom2, in, out);
+        reserveARoom(goodCustomer, newRoom3, in2, out2);
+        MainMenu.startMainMenu();
 
-        System.out.println(CustomerService.getCustomer("irene@bohemia.com"));
-        System.out.println(getAllCustomers());
-//        System.out.println(getCustomersReservation(goodCustomer));
-//
-//        System.out.println(getCustomersReservation(customers.get("levi@king.com")));
-//
     }
 
 }

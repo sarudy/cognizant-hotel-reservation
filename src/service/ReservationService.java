@@ -83,7 +83,6 @@ public class ReservationService {
     }
 
     public static Collection<Reservation> getCustomersReservation(Customer customer) {
-        Collections.sort(reservations, Comparator.comparing(Reservation::getCheckInDate));
         Collection<Reservation> reservedByCustomer = new ArrayList<>();
         for (Reservation reservation : reservations) {
             if (customer == reservation.getCustomer()) {
@@ -105,6 +104,7 @@ public class ReservationService {
     }
 
     public static void printReservationList(Collection<Reservation> reservedBy) {
+        // I really want to sort the collection by checkin first but it's not working out
         for (Reservation reservation : reservedBy) {
             printAReservation(reservation);
         }

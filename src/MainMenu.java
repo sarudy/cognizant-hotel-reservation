@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Scanner;
 
+import static service.CustomerService.getCustomer;
+import static service.CustomerService.getValidEmail;
 import static service.ReservationService.*;
 
 
@@ -16,14 +18,14 @@ public class MainMenu {
 
     public static void printMainMenu() {
         System.out.println("" +
-                "  CUSTOMER RESERVATION MENU  " + "\n" +
-                "═════════════════════════════" + "\n" +
+                "   CUSTOMER RESERVATION MENU  " + "\n" +
+                "═══════════════════════════════" + "\n" +
                 "[1] Find and reserve a room  " + "\n" +
-                "[2] See customer reservation " + "\n" +
+                "[2] See customer reservation(s)" + "\n" +
                 "[3] Create an account        " + "\n" +
                 "[4] Admin                    " + "\n" +
                 "[5] Exit                     " + "\n" +
-                "═════════════════════════════" + "\n" +
+                "═══════════════════════════════" + "\n" +
                 "Choose an option by number:");
         // I changed this to brackets because I think they look better;
         // I changed choice 2 to "see customer" because given the other
@@ -48,13 +50,13 @@ public class MainMenu {
                     lookUpReservation();
                     break;
                 case "3":
-                    System.out.println("create an account");
+                    createCustomer();
                     break;
                 case "4":
-                    System.out.println("go to admin menu");
+                    AdminMenu.startAdminMenu();
                     break;
                 case "5":
-                    System.out.println("Leave program");
+                    System.out.println("Exiting program.");
                     break;
                 default:
                     System.out.println("Please enter one of the given options:");
@@ -69,8 +71,8 @@ public class MainMenu {
     private static void findAndReserveARoom() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ID (i.e. email) for the customer making a reservation:");
-        String customerEmail = CustomerService.getValidEmail(scanner.nextLine());
-        Customer customer = CustomerService.getCustomer(customerEmail);
+        String customerEmail = getValidEmail(scanner.nextLine());
+        Customer customer = getCustomer(customerEmail);
 
         if (customer != null) {
 
@@ -120,8 +122,7 @@ public class MainMenu {
                         findAndReserveARoom();
                         break;
                     case "2":
-                        System.out.println("create an account 💜💙💚💛🧡");
-
+                        createCustomer();
                         break;
                     case "3":
                         startMainMenu();
@@ -139,11 +140,11 @@ public class MainMenu {
     public static void lookUpReservation() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ID (i.e. email) for the customer:");
-        String customerEmail = CustomerService.getValidEmail(scanner.nextLine());
-        Customer customer = CustomerService.getCustomer(customerEmail);
+        String customerEmail = getValidEmail(scanner.nextLine());
+        Customer customer = getCustomer(customerEmail);
 
         if (customer != null) {
-            printReservationList(getCustomersReservation(customer));
+            System.out.println(getCustomersReservation(customer));
 
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
@@ -174,4 +175,50 @@ public class MainMenu {
             }
         }
     }
+
+    public static void createCustomer() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the customer's first name:");
+        String first = scanner.nextLine();
+
+        System.out.println("Enter the customer's last name:");
+        String last = scanner.nextLine();
+
+        System.out.println("Enter the customer's email (this will also serve as the customer ID:");
+        String email = getValidEmail(scanner.nextLine());
+
+        if (getCustomer(email) == null ) {
+            CustomerService.addCustomer(first,last,email);
+            System.out.println("Created " + getCustomer(email));
+            startMainMenu();
+        } else {
+            System.out.println(getCustomer(email) + " already exists.");
+            System.out.println("Do you want to: " + "\n" +
+                    "[1] Return to the main menu" + "\n" +
+                    "[2] Create an account using a different email/ID" + "\n" +
+                    "═════════════════════════════" + "\n" +
+                    "Choose an option by number:");
+            try {
+                String menuOptions = "";
+                menuOptions = scanner.nextLine();
+                switch (menuOptions) {
+                    case "1":
+                        startMainMenu();
+                        break;
+                    case "2":
+                        createCustomer();
+                        break;
+                    default:
+                        System.out.println("Please enter one of the given options:");
+                        startMainMenu();
+                }
+            } catch (Exception e) {
+                System.out.println("well that was no good");
+            }
+        }
+    }
+
+
+
 }
