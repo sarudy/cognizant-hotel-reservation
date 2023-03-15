@@ -1,5 +1,4 @@
 import api.AdminResource;
-import api.HotelResource;
 import model.Customer;
 import model.IRoom;
 import model.Room;
@@ -8,11 +7,10 @@ import service.CustomerService;
 import service.ReservationService;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
-import static service.CustomerService.addCustomer;
-import static service.CustomerService.customers;
-import static service.ReservationService.findRooms;
+import static service.CustomerService.*;
+import static service.ReservationService.getCustomersReservation;
+import static service.ReservationService.reserveARoom;
 
 public class Tester {
     public static void main(String[] args) {
@@ -68,16 +66,19 @@ public class Tester {
 // test make a reservation
         Customer pilotCustomer = new Customer("Amelia", "Earhart", "earhart@lostatsea.net");
         Customer cleverCustomer = new Customer("Irene", "Adler", "irene@bohemia.com");
+        addCustomer(goodCustomer.getFirstName(), goodCustomer.getLastName(), goodCustomer.getEmail());
+        addCustomer(cleverCustomer.getFirstName(), cleverCustomer.getLastName(), cleverCustomer.getEmail());
+        addCustomer(pilotCustomer.getFirstName(), pilotCustomer.getLastName(), pilotCustomer.getEmail());
         LocalDate in = LocalDate.of(2023, 10, 8);
         LocalDate out = LocalDate.of(2023, 10, 12);
 //        Reservation newRes1 = new Reservation(goodCustomer, newRoom2, in, out);
 //        System.out.println(newRes1);
         LocalDate in2 = LocalDate.of(2023, 11, 2);
         LocalDate out2 = LocalDate.of(2023, 11, 4);
-        ReservationService.reserveARoom(goodCustomer, newRoom2, in, out);
-        ReservationService.reserveARoom(goodCustomer, newRoom3, in2, out2);
+        reserveARoom(goodCustomer, newRoom2, in, out);
+        reserveARoom(goodCustomer, newRoom3, in2, out2);
 //        System.out.println(ReservationService.reservations);
-        ReservationService.reserveARoom(cleverCustomer, newRoom4, LocalDate.of(2023, 04, 2),
+        reserveARoom(cleverCustomer, newRoom4, LocalDate.of(2023, 04, 2),
                 LocalDate.of(2023, 04, 12));
 //        System.out.println(ReservationService.findRooms(LocalDate.of(2023, 10, 9),
 //                LocalDate.of(2023, 10, 12)));
@@ -100,13 +101,20 @@ public class Tester {
 //        System.out.println(AdminResource.getAllRooms());
 //        System.out.println(AdminResource.getAllCustomers());
 //          AdminResource.displayAllReservations();
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom1, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 02));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom2, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 03));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom3, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 04));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom4, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 05));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom5, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 06));
-        ReservationService.reserveARoom(customers.get("levi@king.com"), newRoom6, LocalDate.of(2024, 01, 01),LocalDate.of(2024, 01, 10));
-        MainMenu.startMainMenu();
+        reserveARoom(customers.get("levi@king.com"), newRoom1, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 02));
+        reserveARoom(customers.get("levi@king.com"), newRoom2, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 03));
+        reserveARoom(customers.get("levi@king.com"), newRoom3, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 04));
+        reserveARoom(customers.get("levi@king.com"), newRoom4, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 05));
+        reserveARoom(customers.get("levi@king.com"), newRoom5, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 06));
+        reserveARoom(customers.get("levi@king.com"), newRoom6, LocalDate.of(2024, 01, 01), LocalDate.of(2024, 01, 10));
+//        MainMenu.startMainMenu();
+
+        System.out.println(CustomerService.getCustomer("irene@bohemia.com"));
+        System.out.println(getAllCustomers());
+//        System.out.println(getCustomersReservation(goodCustomer));
+//
+//        System.out.println(getCustomersReservation(customers.get("levi@king.com")));
+//
     }
 
 }

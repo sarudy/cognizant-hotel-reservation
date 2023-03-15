@@ -83,6 +83,7 @@ public class ReservationService {
     }
 
     public static Collection<Reservation> getCustomersReservation(Customer customer) {
+        Collections.sort(reservations, Comparator.comparing(Reservation::getCheckInDate));
         Collection<Reservation> reservedByCustomer = new ArrayList<>();
         for (Reservation reservation : reservations) {
             if (customer == reservation.getCustomer()) {
@@ -101,6 +102,12 @@ public class ReservationService {
                 formatter.format((ChronoUnit.DAYS.between(reservation.getCheckInDate(),
                         reservation.getCheckOutDate())) * reservation.getRoom().getRoomPrice()) + "\n"
         );
+    }
+
+    public static void printReservationList(Collection<Reservation> reservedBy) {
+        for (Reservation reservation : reservedBy) {
+            printAReservation(reservation);
+        }
 
     }
 

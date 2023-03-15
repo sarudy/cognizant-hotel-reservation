@@ -13,6 +13,7 @@ import static service.ReservationService.*;
 public class MainMenu {
     // allowing a more customer friendly date format for output that might be exposed to the guest
     static DateTimeFormatter dmy = DateTimeFormatter.ofPattern("EEE d MMM YYYY");
+
     public static void printMainMenu() {
         System.out.println("" +
                 "  CUSTOMER RESERVATION MENU  " + "\n" +
@@ -44,7 +45,7 @@ public class MainMenu {
                     findAndReserveARoom();
                     break;
                 case "2":
-                    System.out.print("see my reservation");
+                    lookUpReservation();
                     break;
                 case "3":
                     System.out.println("create an account");
@@ -70,7 +71,6 @@ public class MainMenu {
         System.out.println("Enter the ID (i.e. email) for the customer making a reservation:");
         String customerEmail = CustomerService.getValidEmail(scanner.nextLine());
         Customer customer = CustomerService.getCustomer(customerEmail);
-
 
         if (customer != null) {
 
@@ -104,7 +104,6 @@ public class MainMenu {
                 }
             }
 
-            System.out.println("💜💙💚💛🧡");
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
@@ -121,7 +120,8 @@ public class MainMenu {
                         findAndReserveARoom();
                         break;
                     case "2":
-                        System.out.println("create an account");
+                        System.out.println("create an account 💜💙💚💛🧡");
+
                         break;
                     case "3":
                         startMainMenu();
@@ -133,9 +133,45 @@ public class MainMenu {
             } catch (Exception e) {
                 System.out.println("well that was no good");
             }
-
         }
+    }
 
+    public static void lookUpReservation() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the ID (i.e. email) for the customer:");
+        String customerEmail = CustomerService.getValidEmail(scanner.nextLine());
+        Customer customer = CustomerService.getCustomer(customerEmail);
 
+        if (customer != null) {
+            printReservationList(getCustomersReservation(customer));
+
+        } else {
+            System.out.println("There is no customer with the ID: " + customerEmail + ".");
+            System.out.println("Do you want to: " + "\n" +
+                    "[1] Try a different email" + "\n" +
+//          this menu does not get a create customer option because nothing is
+//          being created here only searched so it's no more effort to just make a
+//          new customer from the main menu
+                    "[2] Return to the Main Menu" + "\n" +
+                    "═════════════════════════════" + "\n" +
+                    "Choose an option by number:");
+            try {
+                String menuOptions = "";
+                menuOptions = scanner.nextLine();
+                switch (menuOptions) {
+                    case "1":
+                        findAndReserveARoom();
+                        break;
+                    case "2":
+                        startMainMenu();
+                        break;
+                    default:
+                        System.out.println("Please enter one of the given options:");
+                        startMainMenu();
+                }
+            } catch (Exception e) {
+                System.out.println("well that was no good");
+            }
+        }
     }
 }

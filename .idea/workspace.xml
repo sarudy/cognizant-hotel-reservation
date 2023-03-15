@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdb109c9-ff9b-4875-a0b5-028a47124c50" name="Changes" comment="Yes I KNOW it's not working">
+    <list default="true" id="fdb109c9-ff9b-4875-a0b5-028a47124c50" name="Changes" comment="isEmpty() -- what an amazing tool">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678754658217</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="isEmpty() -- what an amazing tool">
+      <created>1678827843025</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1678827843025</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,7 +198,8 @@
     <MESSAGE value="why do you not exclude duplicates for me.  whyyyyy?" />
     <MESSAGE value="why did I use Maps?" />
     <MESSAGE value="Yes I KNOW it's not working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Yes I KNOW it's not working" />
+    <MESSAGE value="isEmpty() -- what an amazing tool" />
+    <option name="LAST_COMMIT_MESSAGE" value="isEmpty() -- what an amazing tool" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HotelRegistration$Tester.ic" NAME="Tester Coverage Results" MODIFIED="1678408832734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
