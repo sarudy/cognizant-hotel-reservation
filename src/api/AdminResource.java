@@ -8,8 +8,7 @@ import service.ReservationService;
 import java.util.Collection;
 import java.util.List;
 
-import static service.ReservationService.printAllReservation;
-import static service.ReservationService.rooms;
+import static service.ReservationService.*;
 
 public class AdminResource {
     private static AdminResource INSTANCE;
@@ -28,7 +27,10 @@ public class AdminResource {
         return CustomerService.getCustomer(email);
     }
 
-    public static void addRoom(List<IRoom> rooms) {
+    public static void addRoom(IRoom room) {
+        ReservationService.addRoom(room);
+    }
+    public static void addAllRooms(List<IRoom> rooms) {
         for (IRoom room : rooms) {
             ReservationService.addRoom(room);
         }
@@ -36,6 +38,10 @@ public class AdminResource {
 
     public static Collection<IRoom> getAllRooms() {
         return rooms.values();
+    }
+
+    public static void printAllRooms() {
+        printRooms(rooms);
     }
 
     public static Collection<Customer> getAllCustomers() {
