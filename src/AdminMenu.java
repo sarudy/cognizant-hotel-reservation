@@ -23,6 +23,13 @@ public class AdminMenu {
                 "Choose an option by number:");
     }
 
+    public static void pause() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("═══════════════════════════════" + "\n" +
+                "Press Enter To Continue:");
+        String iDoNothing = scanner.nextLine();
+    }
+
     public static void startAdminMenu() {
         String menuOptions = "";
         Scanner scanner = new Scanner(System.in);
@@ -36,18 +43,22 @@ public class AdminMenu {
                     for (Customer person : getAllCustomers()) {
                         System.out.println(person);
                     }
+                    pause();
                     startAdminMenu();
                     break;
                 case "2":
                     printAllRooms();
+                    pause();
                     startAdminMenu();
                     break;
                 case "3":
                     displayAllReservations();
+                    pause();
                     startAdminMenu();
                     break;
                 case "4":
                     addARoom();
+                    pause();
                     startAdminMenu();
                     break;
                 case "5":

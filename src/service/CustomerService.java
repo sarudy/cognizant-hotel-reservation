@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class CustomerService {
+    // I used a HashMap instead of an ArrayList because the lesson said it was more efficient.  I have been
+    // cursing that choice for the entire project.
     public static final Map<String, Customer> customers = new HashMap<String, Customer>();
     private static CustomerService INSTANCE;
 
@@ -36,8 +38,7 @@ public class CustomerService {
             }
         }
         return email.toLowerCase();
-        // I was thinking as long as I was in here I should make all the emails lowercase to make sure I don't have
-        // lookup issues later.
+        // I was thinking as long as I was in here I should make all the emails lowercase to save lookup issues later.
     }
 
     public static void addCustomer(String firstName, String lastName, String email) {

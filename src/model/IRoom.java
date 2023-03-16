@@ -7,5 +7,6 @@ public interface IRoom {
 
     Double getRoomPrice();
 
+    // OK seriously how weird is it that we NEVER use isFree?
     boolean isFree();
 }

@@ -18,13 +18,13 @@ public class MainMenu {
 
     public static void printMainMenu() {
         System.out.println("" +
-                "   CUSTOMER RESERVATION MENU  " + "\n" +
+                "   CUSTOMER RESERVATION MENU   " + "\n" +
                 "═══════════════════════════════" + "\n" +
-                "[1] Find and reserve a room  " + "\n" +
+                "[1] Find and reserve a room    " + "\n" +
                 "[2] See customer reservation(s)" + "\n" +
-                "[3] Create an account        " + "\n" +
-                "[4] Admin                    " + "\n" +
-                "[5] Exit                     " + "\n" +
+                "[3] Create an account          " + "\n" +
+                "[4] Admin                      " + "\n" +
+                "[5] Exit                       " + "\n" +
                 "═══════════════════════════════" + "\n" +
                 "Choose an option by number:");
         // I changed this to brackets because I think they look better;
@@ -86,7 +86,6 @@ public class MainMenu {
                     "Enter date in yyyy-mm-dd format:");
             LocalDate checkOut = linearTimePlease(checkIn, getValiDate(scanner.nextLine()));
 
-
             Map<String, IRoom> availableRooms = findRooms(checkIn, checkOut);
             if (!availableRooms.isEmpty()) {
                 System.out.println("These rooms are available for a stay from " +
@@ -105,7 +104,6 @@ public class MainMenu {
                     System.out.println("no room a the inn");
                 }
             }
-
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
@@ -218,6 +216,4 @@ public class MainMenu {
             }
         }
     }
-
-
 }

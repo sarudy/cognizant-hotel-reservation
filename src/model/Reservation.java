@@ -6,10 +6,12 @@ import java.util.Objects;
 public class Reservation {
     public final Customer customer;
     private final IRoom room;
+    // I know I am deviating from the script but I had to find another source to learn about dates because the
+    // course chapter was not helping and I found LocalDate along the way and it's much better
     private final LocalDate checkInDate;
     private final LocalDate checkOutDate;
 
-    /* don't need to validate the Date format because the java class does it for me */
+    // don't need to validate the Date format because the java class does it for me
     public Reservation(Customer customer, IRoom room, LocalDate checkInDate, LocalDate checkOutDate) {
         this.customer = customer;
         this.room = room;
@@ -28,7 +30,6 @@ public class Reservation {
     public LocalDate getCheckInDate() {
         return this.checkInDate;
     }
-    // I'll be using LocalDate instead of Date and Calendar because it's less annoying
 
     public LocalDate getCheckOutDate() {
         return this.checkOutDate;

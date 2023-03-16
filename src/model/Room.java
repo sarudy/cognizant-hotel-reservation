@@ -14,7 +14,7 @@ public class Room implements IRoom {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomPrice = roomPrice;
-        isFree = roomPrice == 0;
+        isFree = roomPrice == 0.00;
     }
 
     @Override

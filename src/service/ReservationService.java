@@ -65,7 +65,6 @@ public class ReservationService {
             }
         }
         return open;
-
     }
 
     public static void printRooms(Map<String, IRoom> theseRooms) {
@@ -79,7 +78,6 @@ public class ReservationService {
             System.out.println(thisRoom.getValue().getRoomType() + " ROOM: " + thisRoom.getValue().getRoomNumber() +
                     "\t" + "PRICE: " + formatter.format(thisRoom.getValue().getRoomPrice()) + " per night");
         }
-
     }
 
     public static Collection<Reservation> getCustomersReservation(Customer customer) {
@@ -180,16 +178,12 @@ public class ReservationService {
                         "Please provide a check out date at least one day after check in: ");
                 LocalDate tryAgain = getValiDate(scanner.nextLine());
                 if (CheckOut.isAfter(CheckIn)) {
-                    scanner.close();
                     return tryAgain;
                 }
-
             }
             return CheckOut;
         }
     }
-
-
 }
 
 

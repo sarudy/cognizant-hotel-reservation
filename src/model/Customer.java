@@ -5,7 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Customer {
-    // email checker regex I found via search instead of the one from the lesson 'cause I was feeling fancy but still lazy
+    // Thus ises an email checker regex I found via search instead of the one from the lesson
+    // because I was feeling fancy but still lazy
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private final String firstName;
@@ -52,6 +53,7 @@ public class Customer {
         return Objects.hash(getFirstName(), getLastName(), getEmail());
     }
 
+    // This override is on purpose though.  It seems like a one line output will make things fit better later.
     @Override
     public String toString() {
         return "Customer: " + firstName + " " + lastName + " (" + email + ")";
