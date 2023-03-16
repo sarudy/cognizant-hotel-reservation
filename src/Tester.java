@@ -1,15 +1,13 @@
-import api.AdminResource;
 import model.Customer;
 import model.IRoom;
 import model.Room;
 import model.RoomType;
-import service.CustomerService;
 import service.ReservationService;
 
 import java.time.LocalDate;
 
-import static service.CustomerService.*;
-import static service.ReservationService.getCustomersReservation;
+import static service.CustomerService.addCustomer;
+import static service.CustomerService.customers;
 import static service.ReservationService.reserveARoom;
 
 public class Tester {

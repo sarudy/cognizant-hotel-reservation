@@ -4,9 +4,7 @@ import model.Customer;
 import model.IRoom;
 import model.Room;
 import model.RoomType;
-import service.ReservationService;
 
-import java.util.List;
 import java.util.Scanner;
 
 import static api.AdminResource.*;
@@ -97,7 +95,7 @@ public class AdminMenu {
             RoomType type = pickAType();
             System.out.println("Enter the cost per night of the room:");
             Double cost = scanner.nextDouble();
-            IRoom aRoom = new Room(number,type,cost);
+            IRoom aRoom = new Room(number, type, cost);
             AdminResource.addRoom(aRoom);
         } else {
             System.out.println("This room has already been created:");

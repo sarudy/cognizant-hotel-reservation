@@ -1,9 +1,11 @@
 package service;
 
 import model.Customer;
-import model.IRoom;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class CustomerService {
     public static final Map<String, Customer> customers = new HashMap<String, Customer>();

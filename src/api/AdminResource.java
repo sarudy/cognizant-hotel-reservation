@@ -30,6 +30,7 @@ public class AdminResource {
     public static void addRoom(IRoom room) {
         ReservationService.addRoom(room);
     }
+
     public static void addAllRooms(List<IRoom> rooms) {
         for (IRoom room : rooms) {
             ReservationService.addRoom(room);

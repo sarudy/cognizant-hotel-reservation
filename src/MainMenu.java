@@ -188,8 +188,8 @@ public class MainMenu {
         System.out.println("Enter the customer's email (this will also serve as the customer ID:");
         String email = getValidEmail(scanner.nextLine());
 
-        if (getCustomer(email) == null ) {
-            CustomerService.addCustomer(first,last,email);
+        if (getCustomer(email) == null) {
+            CustomerService.addCustomer(first, last, email);
             System.out.println("Created " + getCustomer(email));
             startMainMenu();
         } else {
@@ -218,7 +218,6 @@ public class MainMenu {
             }
         }
     }
-
 
 
 }
