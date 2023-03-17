@@ -16,7 +16,7 @@ import static service.ReservationService.*;
 
 public class MainMenu {
     // allowing a more customer friendly date format for output that might be exposed to the guest
-    static DateTimeFormatter dmy = DateTimeFormatter.ofPattern("EEE d MMM YYYY");
+    static DateTimeFormatter dmy = DateTimeFormatter.ofPattern("EEE d MMM yyyy");
 
     public static void printMainMenu() {
         System.out.println("" +
