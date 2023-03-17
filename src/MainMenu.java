@@ -1,5 +1,6 @@
 import model.Customer;
 import model.IRoom;
+import model.Reservation;
 import service.CustomerService;
 
 import java.time.LocalDate;
@@ -67,6 +68,27 @@ public class MainMenu {
         }
     }
 
+    private static void actuallyBooktheRoom(Customer customer, Map<String, IRoom> availableRooms,
+                                            LocalDate checkIn, LocalDate checkOut) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which room would " + customer.getFirstName() + " like to reserve?");
+        String roomNumber = scanner.nextLine();
+        if (availableRooms.containsKey(roomNumber)) {
+            Reservation reservation = reserveARoom(customer, rooms.get(roomNumber), checkIn, checkOut);
+            System.out.println("You have reserved:");
+            printAReservation(reservation);
+            AdminMenu.pause();
+            startMainMenu();
+        } else {
+            System.out.println("That room is not available for the time frame." +
+                    customer.getFirstName() + " will need to choose from one of the following:");
+            printRooms(availableRooms);
+            System.out.println("═══════════════════════════════");
+            actuallyBooktheRoom(customer, availableRooms, checkIn, checkOut);
+        }
+
+
+    }
 
     private static void findAndReserveARoom() {
         Scanner scanner = new Scanner(System.in);
@@ -91,6 +113,7 @@ public class MainMenu {
                 System.out.println("These rooms are available for a stay from " +
                         dmy.format(checkIn) + " to " + dmy.format(checkOut));
                 printRooms(availableRooms);
+                actuallyBooktheRoom(customer, availableRooms, checkIn, checkOut);
             } else {
                 System.out.println("We are sorry.  There are no available rooms for a stay from " +
                         dmy.format(checkIn) + " to " + dmy.format(checkOut));
@@ -100,10 +123,12 @@ public class MainMenu {
                     System.out.println("\nThese rooms are available for a stay from " +
                             dmy.format(checkIn.plusWeeks(1)) + " to " + dmy.format(checkOut.plusWeeks(1)));
                     printRooms(altRooms);
+                    actuallyBooktheRoom(customer, altRooms, checkIn, checkOut);
                 } else {
                     System.out.println("no room a the inn");
                 }
             }
+
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
