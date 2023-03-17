@@ -5,6 +5,7 @@ import service.CustomerService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -123,9 +124,9 @@ public class MainMenu {
                     System.out.println("\nThese rooms are available for a stay from " +
                             dmy.format(checkIn.plusWeeks(1)) + " to " + dmy.format(checkOut.plusWeeks(1)));
                     printRooms(altRooms);
-                    actuallyBooktheRoom(customer, altRooms, checkIn, checkOut);
+                    actuallyBooktheRoom(customer, altRooms, checkIn.plusWeeks(1), checkOut.plusWeeks(1));
                 } else {
-                    System.out.println("no room a the inn");
+                    System.out.println("We are sorry.  There are no rooms for either time frame.");
                 }
             }
 
@@ -167,8 +168,12 @@ public class MainMenu {
         Customer customer = getCustomer(customerEmail);
 
         if (customer != null) {
-            System.out.println(getCustomersReservation(customer));
-
+            Collection<Reservation> customersReservations = (getCustomersReservation(customer));
+            for (Reservation reservation : customersReservations) {
+                printAReservation(reservation);
+            }
+            AdminMenu.pause();
+            startMainMenu();
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
