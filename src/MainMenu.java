@@ -20,14 +20,14 @@ public class MainMenu {
 
     public static void printMainMenu() {
         System.out.println("" +
-                "   CUSTOMER RESERVATION MENU   " + "\n" +
-                "═══════════════════════════════" + "\n" +
-                "[1] Find and reserve a room    " + "\n" +
-                "[2] See customer reservation(s)" + "\n" +
-                "[3] Create an account          " + "\n" +
-                "[4] Admin                      " + "\n" +
-                "[5] Exit                       " + "\n" +
-                "═══════════════════════════════" + "\n" +
+                "       CUSTOMER RESERVATION MENU        " + "\n" +
+                "════════════════════════════════════════" + "\n" +
+                "[1] Find and reserve a room             " + "\n" +
+                "[2] See customer reservation(s)         " + "\n" +
+                "[3] Create an account                   " + "\n" +
+                "[4] Admin                               " + "\n" +
+                "[5] Exit                                " + "\n" +
+                "════════════════════════════════════════" + "\n" +
                 "Choose an option by number:");
         // I changed this to brackets because I think they look better;
         // I changed choice 2 to "see customer" because given the other
@@ -65,11 +65,12 @@ public class MainMenu {
                     startMainMenu();
             }
         } catch (Exception e) {
+            System.out.println(e.getStackTrace());
             System.out.println("well that was no good");
         }
     }
 
-    private static void actuallyBooktheRoom(Customer customer, Map<String, IRoom> availableRooms,
+    private static void actuallyBookTheRoom(Customer customer, Map<String, IRoom> availableRooms,
                                             LocalDate checkIn, LocalDate checkOut) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which room would " + customer.getFirstName() + " like to reserve?");
@@ -84,8 +85,8 @@ public class MainMenu {
             System.out.println("That room is not available for the time frame." +
                     customer.getFirstName() + " will need to choose from one of the following:");
             printRooms(availableRooms);
-            System.out.println("═══════════════════════════════");
-            actuallyBooktheRoom(customer, availableRooms, checkIn, checkOut);
+            System.out.println("════════════════════════════════════════");
+            actuallyBookTheRoom(customer, availableRooms, checkIn, checkOut);
         }
 
 
@@ -114,28 +115,30 @@ public class MainMenu {
                 System.out.println("These rooms are available for a stay from " +
                         dmy.format(checkIn) + " to " + dmy.format(checkOut));
                 printRooms(availableRooms);
-                actuallyBooktheRoom(customer, availableRooms, checkIn, checkOut);
+                actuallyBookTheRoom(customer, availableRooms, checkIn, checkOut);
             } else {
                 System.out.println("We are sorry.  There are no available rooms for a stay from " +
                         dmy.format(checkIn) + " to " + dmy.format(checkOut));
                 System.out.println("\nWe'll check the following week for alternatives.");
+                System.out.println("════════════════════════════════════════");
                 Map<String, IRoom> altRooms = findRooms(checkIn.plusWeeks(1), checkOut.plusWeeks(1));
                 if (!altRooms.isEmpty()) {
                     System.out.println("\nThese rooms are available for a stay from " +
                             dmy.format(checkIn.plusWeeks(1)) + " to " + dmy.format(checkOut.plusWeeks(1)));
                     printRooms(altRooms);
-                    actuallyBooktheRoom(customer, altRooms, checkIn.plusWeeks(1), checkOut.plusWeeks(1));
+                    actuallyBookTheRoom(customer, altRooms, checkIn.plusWeeks(1), checkOut.plusWeeks(1));
                 } else {
                     System.out.println("We are sorry.  There are no rooms for either time frame.");
+                    startMainMenu();
                 }
             }
 
         } else {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
-                    "[1] Try a different email" + "\n" +
-                    "[2] Create a new customer account using this email" + "\n" +
-                    "[3] Return to the Main Menu" + "\n" +
+                    "[1] Try a different email/ID" + "\n" +
+//                    "[2] Create a new customer account using this email" + "\n" +
+                    "[2] Return to the Main Menu" + "\n" +
                     "═════════════════════════════" + "\n" +
                     "Choose an option by number:");
             try {
@@ -145,10 +148,12 @@ public class MainMenu {
                     case "1":
                         findAndReserveARoom();
                         break;
+                        // letting the user create a user right where the issue starts is good UX but adds too many
+                        // loop conditions to deal with right now.  I will have to scrap the feature for now.
+//                    case "2":
+//                        createCustomer();
+//                        break;
                     case "2":
-                        createCustomer();
-                        break;
-                    case "3":
                         startMainMenu();
                         break;
                     default:
@@ -156,6 +161,7 @@ public class MainMenu {
                         startMainMenu();
                 }
             } catch (Exception e) {
+                System.out.println(e.getStackTrace());
                 System.out.println("well that was no good");
             }
         }
@@ -178,9 +184,6 @@ public class MainMenu {
             System.out.println("There is no customer with the ID: " + customerEmail + ".");
             System.out.println("Do you want to: " + "\n" +
                     "[1] Try a different email" + "\n" +
-//          this menu does not get a create customer option because nothing is
-//          being created here only searched so it's no more effort to just make a
-//          new customer from the main menu
                     "[2] Return to the Main Menu" + "\n" +
                     "═════════════════════════════" + "\n" +
                     "Choose an option by number:");
@@ -207,14 +210,14 @@ public class MainMenu {
     public static void createCustomer() {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Enter the customer's email (this will also serve as the customer ID:");
+        String email = getValidEmail(scanner.nextLine());
+
         System.out.println("Enter the customer's first name:");
         String first = scanner.nextLine();
 
         System.out.println("Enter the customer's last name:");
         String last = scanner.nextLine();
-
-        System.out.println("Enter the customer's email (this will also serve as the customer ID:");
-        String email = getValidEmail(scanner.nextLine());
 
         if (getCustomer(email) == null) {
             CustomerService.addCustomer(first, last, email);

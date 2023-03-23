@@ -25,7 +25,7 @@ public class AdminMenu {
 
     public static void pause() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("═══════════════════════════════" + "\n" +
+        System.out.println("════════════════════════════════════════" + "\n" +
                 "Press Enter To Continue:");
         String iDoNothing = scanner.nextLine();
     }
@@ -40,6 +40,10 @@ public class AdminMenu {
             menuOptions = scanner.nextLine();
             switch (menuOptions) {
                 case "1":
+                    if (getAllCustomers().isEmpty()) {
+                        System.out.println("The customer database is empty. " + "\n" +
+                                "You can add customers from the Main Menu (option [5]).");
+                    }
                     for (Customer person : getAllCustomers()) {
                         System.out.println(person);
                     }
@@ -47,6 +51,10 @@ public class AdminMenu {
                     startAdminMenu();
                     break;
                 case "2":
+                    if (getAllRooms().isEmpty()) {
+                        System.out.println("We have no rooms listed" + "\n" +
+                                "You can add rooms via Option [4].");
+                    }
                     printAllRooms();
                     pause();
                     startAdminMenu();
@@ -69,6 +77,7 @@ public class AdminMenu {
                     startAdminMenu();
             }
         } catch (Exception e) {
+            System.out.println(e.getStackTrace());
             System.out.println("well that was no good");
         }
     }
@@ -92,6 +101,7 @@ public class AdminMenu {
                     break;
             }
         } catch (Exception e) {
+            System.out.println(e.getStackTrace());
             System.out.println("well that was no good");
         }
         return pickAType();
@@ -101,7 +111,7 @@ public class AdminMenu {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the room number you would like to create:");
-        String number = scanner.nextLine();
+        String number = AdminResource.getValidRoomNumber();
         if (HotelResource.getRoom(number) == null) {
             RoomType type = pickAType();
             System.out.println("Enter the cost per night of the room:");
@@ -112,8 +122,5 @@ public class AdminMenu {
             System.out.println("This room has already been created:");
             System.out.println(HotelResource.getRoom(number));
         }
-
-
     }
-
 }
